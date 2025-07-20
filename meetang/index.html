@@ -5,19 +5,25 @@
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <button type="button" class="text-white bg-blue-700"> </button>
+<body class="flex items-center justify-center h-screen bg-gray-100">
+  <input type="button" id="loginBtn" value="เข้าสู่ระบบด้วย LINE" class="text-white bg-blue-700 px-6 py-2 rounded shadow-md hover:bg-blue-800" />
 
   <script>
-      window.onload = function(){
-        liff.init({liffId: "2007784262-rOz1v0Jd"}, function(){
-          liff.ready.then(() => {
-          if(liff.isLoggedIn()){
-            
-          }
+    window.onload = function () {
+      liff.init({ liffId: "2007784262-rOz1v0Jd" }, () => {
+        if (liff.isLoggedIn()) {
+          liff.getProfile().then(profile => {
+            document.getElementById("loginBtn").value = "สวัสดี " + profile.displayName;
           });
-        })
-      }
+        } else {
+          document.getElementById("loginBtn").addEventListener("click", function () {
+            liff.login();
+          });
+        }
+      }, err => {
+        console.error("LIFF Initialization failed ", err);
+      });
+    };
   </script>
 </body>
 </html>
