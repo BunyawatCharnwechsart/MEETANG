@@ -12,7 +12,9 @@
       window.onload = function(){
         liff.init({liffId: "2007784262-rOz1v0Jd"}, function(){
           liff.ready.then(() => {
-            alert("test liff")
+          if(liff.isLoggedIn()){
+            
+          }
           });
         })
       }
